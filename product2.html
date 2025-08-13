@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aarju Suits – Product Details</title>
+<style>
+:root{
+  --bg:#fff;--fg:#1a1a1a;--muted:#6b7280;--brand:#c01f43;--brand-700:#a01839;--accent:#f59e0b;--card:#f8fafc;--ring:rgba(192,31,67,.35)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--fg)}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:auto;padding:0 16px}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:6px;padding:12px 20px;font-weight:600;cursor:pointer;transition:.3s}
+.btn:hover{background:var(--brand-700)}
+
+/* Header */
+.noticebar{background:#111;color:#fff;text-align:center;font-size:13px;padding:6px 0;font-weight:600}
+.noticebar span{color:var(--accent)}
+.navbar{background:#fff;border-bottom:1px solid #eee}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;padding:12px 0;flex-wrap:wrap}
+.logo{font-size:24px;font-weight:800;color:var(--brand)}
+nav{display:flex;gap:20px;flex-wrap:wrap}
+nav a{font-weight:600;font-size:14px;color:#374151}
+nav a:hover{color:var(--brand)}
+
+/* Product */
+.product-page{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:30px}
+@media(max-width:768px){.product-page{grid-template-columns:1fr}}
+.breadcrumb{font-size:14px;margin:20px 0;color:var(--muted)}
+.gallery img{border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.product-info h1{font-size:28px;margin-bottom:10px}
+.price{font-size:22px;font-weight:700;color:var(--brand);margin:10px 0}
+.desc{color:var(--muted);line-height:1.5;margin-bottom:20px}
+.tabs{margin-top:30px}
+.tab-btns{display:flex;gap:10px;border-bottom:1px solid #ddd}
+.tab-btns button{background:none;border:none;padding:10px 15px;font-weight:600;cursor:pointer}
+.tab-btns button.active{color:var(--brand);border-bottom:2px solid var(--brand)}
+.tab-content{padding:20px 0}
+
+/* Related */
+.related{margin-top:50px}
+.related h2{margin-bottom:20px}
+.grid{display:grid;gap:15px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.card{border:1px solid #eee;border-radius:8px;overflow:hidden;background:#fff;transition:.3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 6px 14px rgba(0,0,0,0.08)}
+.card img{aspect-ratio:3/4;object-fit:cover}
+.card .info{padding:10px;font-weight:500}
+
+/* Footer */
+footer{margin-top:50px;background:#111;color:#ccc}
+.footer-top{display:grid;gap:20px;padding:40px 16px}
+@media(min-width:768px){.footer-top{grid-template-columns:repeat(4,1fr)}}
+.footer-top h4{color:#fff;margin-bottom:10px}
+.footer-bottom{text-align:center;padding:10px;border-top:1px solid #333;font-size:14px;color:#777}
+</style>
+</head>
+<body>
+<div class="noticebar">📌 <span>NO EXCHANGE / NO RETURN / NO CANCELLATION</span></div>
+<div class="navbar">
+  <div class="container">
+    <div class="logo">Aarju Suits</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">Home</a> / Product Name</div>
+  <div class="product-page">
+    <div class="gallery">
+      <img src="https://labelamrita.com/cdn/shop/files/36E203E9-F71F-46F3-90F9-B9DDAF0D5D8E.jpg?v=1737908556&width=1206" alt="Product main">
+    </div>
+    <div class="product-info">
+      <h1>Black Velvet Sharara</h1>
+      <div class="price">₹ 4,750</div>
+      <p class="desc">Premium velvet sharara set with intricate embroidery. Perfect for festive and wedding occasions.</p>
+      <button class="btn">Add to Cart</button>
+      <div class="tabs">
+        <div class="tab-btns">
+          <button class="active" data-tab="details">Details</button>
+          <button data-tab="shipping">Shipping</button>
+        </div>
+        <div class="tab-content" id="tab-details">Material: Velvet<br>Care: Dry clean only</div>
+        <div class="tab-content" id="tab-shipping" style="display:none">Ships worldwide in 2-5 business days.</div>
+      </div>
+    </div>
+  </div>
+  <div class="related">
+    <h2>Related Products</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://labelamrita.com/cdn/shop/files/EE970360-8520-4C25-9B62-F9791E97D1C3.jpg?v=1737395500&width=1206" alt="">
+        <div class="info">Yellow Chinon Sharara</div>
+      </div>
+      <div class="card">
+        <img src="https://labelamrita.com/cdn/shop/files/IMG-20250103-WA0036.jpg?v=1735920475&width=1200" alt="">
+        <div class="info">Green Velvet Sharara</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-top container">
+    <div>
+      <h4>About</h4>
+      <p>Aarju Suits offers premium Indian ethnic wear designed with elegance and tradition.</p>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <p>Shipping & Returns</p>
+      <p>Size Guide</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>📞 +91 98765 43210</p>
+      <p>📧 support@aarjusuits.example</p>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <p>Instagram · Facebook · YouTube</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="year"></span> Aarju Suits</div>
+</footer>
+<script>
+// Tabs
+const tabs=document.querySelectorAll('.tab-btns button');
+const contents=document.querySelectorAll('.tab-content');
+tabs.forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  tabs.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  contents.forEach(c=>c.style.display='none');
+  document.getElementById('tab-'+btn.dataset.tab).style.display='block';
+ })
+});
+// Footer year
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
