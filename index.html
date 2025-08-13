@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Arju Suits — Designer Wear & Ethnic Collection</title>
+<meta name="description" content="Arju Suits — demo storefront for designer Indian suits. Single-file build (HTML/CSS/JS)." />
+<style>
+/* =====================
+   Arju Suits – Single File Demo
+   Tech: Plain HTML + CSS + JS
+   Notes: Replace demo images & copy with your own. No tracking, no external libs.
+   ===================== */
+
+   .noticebar {
+  background:#111;
+  color:#fff;
+  text-align:center;
+  font-size:13px;
+  padding:6px 0;
+  font-weight:600;
+}
+.noticebar span {color:#facc15;}
+
+/* Main navbar */
+.navbar {
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+.navbar .container {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:10px 0;
+}
+.navbar .logo {
+  font-family:serif;
+  font-size:26px;
+  font-weight:600;
+}
+.navbar nav {
+  display:flex;
+  gap:20px;
+}
+.navbar nav a {
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:600;
+  color:#000;
+}
+.navbar nav a:hover {
+  color:var(--brand);
+}
+.nav-icons {
+  display:flex;
+  gap:14px;
+  font-size:18px;
+}
+
+:root{
+  --bg:#fff;
+  --fg:#1a1a1a;
+  --muted:#6b7280;
+  --brand:#c01f43; /* deep rose */
+  --brand-700:#a01839;
+  --accent:#f59e0b; /* amber */
+  --card:#f8fafc;
+  --ring:rgba(192,31,67,.35);
+  --pill:#0ea5e9;
+  --ok:#16a34a;
+  --warn:#f59e0b;
+  --danger:#ef4444;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+.btn{background:var(--brand);color:#fff;border:none;border-radius:999px;padding:12px 18px;font-weight:700;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 14px rgba(192,31,67,.25)}
+.btn:hover{background:var(--brand-700)}
+.iconbtn{border:1px solid #e5e7eb;background:#fff;border-radius:10px;padding:8px 10px;display:inline-flex;align-items:center;gap:6px}
+.badge{display:inline-block;background:#111;color:#fff;padding:5px 10px;border-radius:999px;font-size:12px}
+.badge.alt{background:var(--pill)}
+.badge.ok{background:var(--ok)}
+.badge.warn{background:var(--warn)}
+
+/* Topbar */
+.topbar{background:#0b1220;color:#e5e7eb;font-size:13px}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;gap:10px}
+.topbar a{opacity:.9}
+.topbar a:hover{opacity:1}
+
+/* Header */
+header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #eef2f7}
+.nav{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:12px;padding:12px 0}
+.logo{font-weight:900;font-size:26px;letter-spacing:.5px}
+.logo span{color:var(--brand)}
+.spacer{display:none}
+.search{display:flex;align-items:center;gap:8px}
+.search input{width:min(42vw,460px);border:1px solid #e5e7eb;border-radius:999px;padding:10px 14px;outline:none}
+.search input:focus{border-color:var(--brand);box-shadow:0 0 0 4px var(--ring)}
+.icons{display:flex;gap:8px}
+#menuBtn{display:none}
+
+/* Nav links */
+.navlinks{display:flex;gap:18px;align-items:center}
+.navlinks a{padding:8px 10px;border-radius:8px;color:#374151;font-weight:600}
+.navlinks a:hover{background:#f3f4f6}
+
+/* Drawer */
+.drawer{position:fixed;inset:0 40% 0 -100%;background:#fff;z-index:50;transition:transform .3s ease;transform:translateX(-100%);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.drawer.open{transform:translateX(0)}
+.drawer .head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #eee}
+.drawer a{display:block;padding:14px 16px;border-bottom:1px solid #f1f5f9;color:#334155}
+
+/* Hero */
+.hero{background:linear-gradient(180deg,#fff, #fff0), url('https://labelamrita.com/cdn/shop/files/48F2376E-638B-4E8A-A0E9-0048E0AC2F0E.jpg?v=1729709233&width=1600') center/cover no-repeat; /* demo img */
+  border-bottom:1px solid #eef2f7}
+.hero .container{padding:24px 16px 36px}
+.hero-card{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;background:#ffffffb3;border:1px solid #e5e7eb;padding:24px;border-radius:18px;backdrop-filter:saturate(1.2) blur(2px)}
+.hero-eyebrow{font-size:13px;color:#374151;text-transform:uppercase;letter-spacing:.2em}
+.hero h1{font-size:36px;margin:6px 0 8px}
+.hero p{color:#4b5563;margin:0 0 10px}
+.hero .badges{display:flex;gap:8px;flex-wrap:wrap}
+.hero-img{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+
+/* Sections */
+.section-head{margin:30px 0 14px;display:flex;justify-content:space-between;align-items:flex-end}
+.section-head h2{margin:0;font-size:24px}
+.section-head a{font-weight:700;color:var(--brand)}
+.grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.card{background:var(--card);border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s ease, box-shadow .15s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.thumb{aspect-ratio:3/4;background:#ddd center/cover no-repeat}
+.meta{padding:10px 12px;display:grid;gap:6px}
+.title{font-weight:700}
+.price-row{display:flex;gap:8px;align-items:center}
+.price{font-weight:900}
+.compare{color:#9ca3af;text-decoration:line-through}
+.kickers{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+
+/* Promo row */
+.promos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.promo{position:relative;border-radius:16px;overflow:hidden;border:1px solid #e5e7eb;background:#000}
+.promo img{opacity:.85}
+.promo .copy{position:absolute;inset:auto 0 0 0;padding:14px;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.6))}
+
+/* Footer */
+footer{margin-top:40px}
+.f-top{background:#0b1220;color:#d1d5db}
+.f-cols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:26px;padding:28px 0}
+.f-cols h5{margin:0 0 10px;font-size:14px;color:#fff;text-transform:uppercase;letter-spacing:.12em}
+.f-cols a{color:#cbd5e1}
+.f-bottom{border-top:1px solid #111827;background:#0b1220;color:#9ca3af}
+.f-bottom .container{padding:14px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+
+/* Utility */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:#f3f4f6;border:1px solid #e5e7eb;padding:6px 10px;border-radius:999px;font-size:13px}
+
+/* Responsive */
+@media (max-width: 1024px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+  .promos{grid-template-columns:repeat(2,1fr)}
+  .hero-card{grid-template-columns:1fr}
+}
+@media (max-width: 700px){
+  #menuBtn{display:inline-flex}
+  .nav{grid-template-columns:auto auto 1fr auto;gap:8px}
+  .navlinks{display:none}
+  .spacer{display:block}
+  .search input{width:100%}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .promos{grid-template-columns:1fr}
+  .f-cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){
+  .f-cols{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+ 
+  <div class="noticebar">📌 <span>NO EXCHANGE / NO RETURN / NO CANCELLATION</span></div>
+  <div class="navbar">
+    <div class="container">
+      <div class="logo">Arju Suits</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#categories">Shop by Category</a>
+        <a href="#products">All Products</a>
+        <a href="#sale">Sale</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#size">Size Guide</a>
+        <a href="#track">Track Order</a>
+      </nav>
+      <div class="nav-icons">
+        <a href="#account">👤</a>
+        <a href="#search">🔍</a>
+        <a href="#cart">🛒</a>
+      </div>
+    </div>
+  </div>
+  <!-- Header -->
+ 
+
+  <!-- Mobile Drawer -->
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="head">
+      <strong>Menu</strong>
+      <button id="closeDrawer" class="iconbtn">✕</button>
+    </div>
+    <a href="#new">New Arrivals</a>
+    <a href="#trending">Trending</a>
+    <a href="#categories">Categories</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </aside>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">Designer Wear</div>
+          <h1>Explore the Finest Indian Collection</h1>
+          <p>Premium fabrics and modern silhouettes for every occasion. Weekly drops, ready to ship.</p>
+          <div class="badges">
+            <span class="badge ok">Ready to Ship</span>
+            <span class="badge alt">Worldwide Delivery</span>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn" href="#new">Shop New Arrivals</a>
+            <a class="btn" style="background:#111" href="#trending">View Trending</a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <!-- Secondary hero image (demo) -->
+          <img src="https://labelamrita.com/cdn/shop/files/36E203E9-F71F-46F3-90F9-B9DDAF0D5D8E.jpg?v=1737908556&width=1200" alt="Elegant embroidered outfit" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Promo banners -->
+    <section class="promos" aria-label="promotions">
+      <a class="promo" href="#categories">
+        <img src="https://labelamrita.com/cdn/shop/files/ABC8E3D7-857D-421D-BB12-65B9316614D7.jpg?v=1738681984&width=1200" alt="Festival edit"/>
+        <div class="copy"><strong>Festival Edit</strong><div>Vibrant hues & handwork</div></div>
+      </a>
+      <a class="promo" href="#categories">
+        <img src="https://labelamrita.com/cdn/shop/files/IMG-20250103-WA0036.jpg?v=1735920475&width=1200" alt="Velvet stories"/>
+        <div class="copy"><strong>Velvet Stories</strong><div>Opulent textures for winter weddings</div></div>
+      </a>
+      <a class="promo" href="#categories">
+        <img src="https://labelamrita.com/cdn/shop/files/5038CEED-4D7D-41BA-988D-7677E589F2AE.jpg?v=1734542123&width=1200" alt="Evening glam"/>
+        <div class="copy"><strong>Evening Glam</strong><div>Shimmer, sequins & zari</div></div>
+      </a>
+    </section>
+
+    <!-- New Arrivals -->
+    <section id="new">
+      <div class="section-head">
+        <h2>New Arrivals</h2>
+        <a href="#">View all</a>
+      </div>
+      <div id="newGrid" class="grid product-grid">
+        <!-- 12 demo products -->
+      </div>
+    </section>
+
+    <!-- Trending -->
+    <section id="trending">
+      <div class="section-head">
+        <h2>Trending Now</h2>
+        <a href="#">View all</a>
+      </div>
+      <div id="trendGrid" class="grid product-grid"></div>
+    </section>
+
+    <!-- Categories (chips) -->
+    <section id="categories">
+      <div class="section-head">
+        <h2>Shop by Category</h2>
+      </div>
+      <div class="chips" style="margin-bottom:16px">
+        <button class="chip filter" data-filter="velvet">Velvet</button>
+        <button class="chip filter" data-filter="sharara">Sharara</button>
+        <button class="chip filter" data-filter="anarkali">Anarkali</button>
+        <button class="chip filter" data-filter="indo">Indo‑Western</button>
+        <button class="chip filter" data-filter="cotton">Cotton</button>
+        <button class="chip filter" data-filter="all">All</button>
+      </div>
+    </section>
+
+    <!-- Social proof -->
+    <section id="about">
+      <div class="section-head">
+        <h2>Why Arju Suits?</h2>
+      </div>
+      <ul style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0;list-style:none">
+        <li class="card" style="padding:16px"><strong>Quality Fabrics</strong><div class="muted">Handpicked textiles for comfort & drape.</div></li>
+        <li class="card" style="padding:16px"><strong>Tailored Fit</strong><div class="muted">XS–3XL. Size-help & quick alterations.</div></li>
+        <li class="card" style="padding:16px"><strong>Fast Dispatch</strong><div class="muted">Ships in 24–48 hrs. Global delivery.</div></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="f-top">
+      <div class="container f-cols">
+        <div>
+          <h5>About</h5>
+          <p>Arju Suits is a demo storefront showcasing a modern ethnicwear layout. Replace this text and images with your brand assets.</p>
+        </div>
+        <div>
+          <h5>Customer Care</h5>
+          <a href="#help">Help Center</a><br/>
+          <a href="#shipping">Shipping & Returns</a><br/>
+          <a href="#sizing">Size Guide</a>
+        </div>
+        <div>
+          <h5>Contact</h5>
+          <p>📍 123 Demo Street, New Delhi, 110001</p>
+          <p>📞 +91 98765 43210</p>
+          <p>📧 support@arjusuits.example</p>
+        </div>
+        <div>
+          <h5>Follow</h5>
+          <p>Instagram · Facebook · YouTube</p>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <div class="container">
+        <div>© <span id="year"></span> Arju Suits — Demo site (no affiliation with other brands).</div>
+        <div>Privacy · Terms</div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+// =====================
+// Demo data (swap with your own CMS/data later)
+// =====================
+const DEMO_PRODUCTS = [
+  {title:"Black Velvet Sharara", price:4750, compare:6990, tag:"velvet sharara", img:"https://labelamrita.com/cdn/shop/files/36E203E9-F71F-46F3-90F9-B9DDAF0D5D8E.jpg?v=1737908556&width=1206"},
+  {title:"Yellow Chinon Sharara", price:4990, compare:0, tag:"sharara", img:"https://labelamrita.com/cdn/shop/files/EE970360-8520-4C25-9B62-F9791E97D1C3.jpg?v=1737395500&width=1206"},
+  {title:"Green Velvet Sharara", price:5850, compare:0, tag:"velvet sharara", img:"https://labelamrita.com/cdn/shop/files/IMG-20250103-WA0036.jpg?v=1735920475&width=1200"},
+  {title:"Indo‑Western Dress", price:1990, compare:2490, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/1000511753_471e3385-58fa-4587-a9fc-bf17f87a9e3d.jpg?v=1715220803&width=1200"},
+  {title:"Ramagreen Velvet Flair", price:6350, compare:7990, tag:"velvet", img:"https://labelamrita.com/cdn/shop/files/48F2376E-638B-4E8A-A0E9-0048E0AC2F0E.jpg?v=1729709233&width=1206"},
+  {title:"Purple Velvet Azaaro", price:5990, compare:0, tag:"velvet", img:"https://labelamrita.com/cdn/shop/files/5038CEED-4D7D-41BA-988D-7677E589F2AE.jpg?v=1734542123&width=1206"},
+  {title:"Teal Crepe Azaro", price:2950, compare:3490, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/BC8BA547-7B8E-4533-967C-F6D069B8BAD0.jpg?v=1753200102&width=1200"},
+  {title:"Moon White Indo‑Western", price:1990, compare:0, tag:"indo cotton", img:"https://labelamrita.com/cdn/shop/files/1000511763.jpg?v=1715220526&width=1200"},
+  {title:"Off‑white Farshi Suit", price:4750, compare:0, tag:"cotton", img:"https://labelamrita.com/cdn/shop/files/AAB46B4C-39FB-43D3-A796-88DA09D355C1.jpg?v=1753631273&width=1200"},
+  {title:"Azaro Suit – Black", price:2250, compare:0, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/8EEBDB7D-E5C7-45B9-9812-E1DF46E651D6.jpg?v=1731954400&width=1200"},
+  {title:"Blue Festive Set", price:2990, compare:3390, tag:"anarkali", img:"https://labelamrita.com/cdn/shop/files/2B0DEBF0-EA14-4BAC-9DC2-D1B2B28D7182.jpg?v=1751807956&width=1206"},
+  {title:"Yellow Party Edit", price:2890, compare:0, tag:"anarkali", img:"https://labelamrita.com/cdn/shop/files/8D0529CF-3E3C-42B6-927C-3251F5C67496.jpg?v=1751989835&width=1206"},
+];
+
+const NEW_IDX = [0,1,2,3,4,5];
+const TREND_IDX = [6,7,8,9,10,11];
+
+function money(n){return `₹ ${n.toLocaleString('en-IN',{maximumFractionDigits:0})}`}
+
+function productCard(p, i){
+  return `
+    <a class="card product" href="#" data-tags="${p.tag}">
+      <div class="thumb" style="background-image:url('${p.img}')"></div>
+      <div class="meta">
+        <div class="title">${p.title}</div>
+        <div class="price-row">
+          <div class="price">${money(p.price)}</div>
+          ${p.compare?`<div class="compare">${money(p.compare)}</div>`:''}
+        </div>
+        <div class="kickers">
+          ${p.tag.split(' ').slice(0,2).map(t=>`<span class='badge'>${t}</span>`).join('')}
+        </div>
+        <button class="btn add" data-index="${i}" style="margin-top:8px;justify-content:center">Add to cart</button>
+      </div>
+    </a>`
+}
+
+function renderGrids(){
+  const newEl = document.getElementById('newGrid');
+  const trEl = document.getElementById('trendGrid');
+  newEl.innerHTML = NEW_IDX.map(i=>productCard(DEMO_PRODUCTS[i], i)).join('');
+  trEl.innerHTML = TREND_IDX.map(i=>productCard(DEMO_PRODUCTS[i], i)).join('');
+}
+
+// Search filter
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e)=>{
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('.product').forEach(card=>{
+    const hay = card.querySelector('.title').textContent.toLowerCase()+" "+(card.dataset.tags||'');
+    card.style.display = hay.includes(q) ? '' : 'none';
+  })
+});
+
+// Tag filters
+Array.from(document.querySelectorAll('.filter')).forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.product').forEach(card=>{
+      card.style.display = (f==='all' || (card.dataset.tags||'').includes(f)) ? '' : 'none';
+    });
+  });
+});
+
+// Cart demo
+let cartCount = 0;
+function bindCart(){
+  document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{
+    cartCount++; document.getElementById('cartCount').textContent = cartCount;
+  }));
+}
+
+// Drawer
+const drawer = document.getElementById('drawer');
+const openBtn = document.getElementById('menuBtn');
+const closeBtn = document.getElementById('closeDrawer');
+openBtn.addEventListener('click',()=>{drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false')});
+closeBtn.addEventListener('click',()=>{drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true')});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Boot
+renderGrids();
+bindCart();
+</script>
+</body>
+</html>
