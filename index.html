@@ -338,10 +338,14 @@ function money(n){return `₹ ${n.toLocaleString('en-IN',{maximumFractionDigits:
 
 function productCard(p, i){
   return `
-    <a class="card product" href="/product${i+1}.html" data-tags="${p.tag}">
-      <div class="thumb" style="background-image:url('${p.img}')"></div>
+    <div class="card product" data-tags="${p.tag}">
+      <a href="/product${i+1}.html">
+        <div class="thumb" style="background-image:url('${p.img}')"></div>
+        <div class="meta">
+          <div class="title">${p.title}</div>
+        </div>
+      </a>
       <div class="meta">
-        <div class="title">${p.title}</div>
         <div class="price-row">
           <div class="price">${money(p.price)}</div>
           ${p.compare?`<div class="compare">${money(p.compare)}</div>`:''}
@@ -351,8 +355,9 @@ function productCard(p, i){
         </div>
         <button class="btn add" data-index="${i}" style="margin-top:8px;justify-content:center">Add to cart</button>
       </div>
-    </a>`
+    </div>`
 }
+
 
 
 function renderGrids(){
