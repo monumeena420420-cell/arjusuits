@@ -7,57 +7,10 @@
 <meta name="description" content="Arju Suits — demo storefront for designer Indian suits. Single-file build (HTML/CSS/JS)." />
 <style>
 /* =====================
-   Arju Suits – Single File Demo
+   Arju Suits – Single File Demo (refined)
    Tech: Plain HTML + CSS + JS
    Notes: Replace demo images & copy with your own. No tracking, no external libs.
    ===================== */
-
-   .noticebar {
-  background:#111;
-  color:#fff;
-  text-align:center;
-  font-size:13px;
-  padding:6px 0;
-  font-weight:600;
-}
-.noticebar span {color:#facc15;}
-
-/* Main navbar */
-.navbar {
-  background:#fff;
-  border-bottom:1px solid #eee;
-}
-.navbar .container {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
-  padding:10px 0;
-}
-.navbar .logo {
-  font-family:serif;
-  font-size:26px;
-  font-weight:600;
-}
-.navbar nav {
-  display:flex;
-  gap:20px;
-}
-.navbar nav a {
-  text-transform:uppercase;
-  font-size:14px;
-  font-weight:600;
-  color:#000;
-}
-.navbar nav a:hover {
-  color:var(--brand);
-}
-.nav-icons {
-  display:flex;
-  gap:14px;
-  font-size:18px;
-}
-
 :root{
   --bg:#fff;
   --fg:#1a1a1a;
@@ -71,6 +24,8 @@
   --ok:#16a34a;
   --warn:#f59e0b;
   --danger:#ef4444;
+  --header-h: 0px;   /* populated by JS */
+  --topbar-h: 0px;   /* populated by JS */
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
@@ -86,13 +41,13 @@ a{color:inherit;text-decoration:none}
 .badge.warn{background:var(--warn)}
 
 /* Topbar */
-.topbar{background:#0b1220;color:#e5e7eb;font-size:13px}
+.topbar{background:#0b1220;color:#e5e7eb;font-size:13px;position:sticky;top:0;z-index:60}
 .topbar .container{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;gap:10px}
 .topbar a{opacity:.9}
 .topbar a:hover{opacity:1}
 
 /* Header */
-header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #eef2f7}
+header{position:sticky;top:var(--topbar-h);z-index:50;background:#fff;border-bottom:1px solid #eef2f7}
 .nav{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:12px;padding:12px 0}
 .logo{font-weight:900;font-size:26px;letter-spacing:.5px}
 .logo span{color:var(--brand)}
@@ -109,19 +64,19 @@ header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid 
 .navlinks a:hover{background:#f3f4f6}
 
 /* Drawer */
-.drawer{position:fixed;inset:0 40% 0 -100%;background:#fff;z-index:50;transition:transform .3s ease;transform:translateX(-100%);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.drawer{position:fixed;inset:0 40% 0 -100%;background:#fff;z-index:100;transition:transform .3s ease;transform:translateX(-100%);box-shadow:0 10px 30px rgba(0,0,0,.15)}
 .drawer.open{transform:translateX(0)}
 .drawer .head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #eee}
 .drawer a{display:block;padding:14px 16px;border-bottom:1px solid #f1f5f9;color:#334155}
 
 /* Hero */
-.hero{background:linear-gradient(180deg,#fff, #fff0), url('https://labelamrita.com/cdn/shop/files/48F2376E-638B-4E8A-A0E9-0048E0AC2F0E.jpg?v=1729709233&width=1600') center/cover no-repeat; /* demo img */
-  border-bottom:1px solid #eef2f7}
+.hero{background:linear-gradient(180deg,#00000040, #00000060), url('https://labelamrita.com/cdn/shop/files/48F2376E-638B-4E8A-A0E9-0048E0AC2F0E.jpg?v=1729709233&width=1600') center/cover no-repeat;border-bottom:1px solid #eef2f7;display:flex;align-items:center;min-height:calc(100svh - var(--header-h) - var(--topbar-h))}
 .hero .container{padding:24px 16px 36px}
 .hero-card{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;background:#ffffffb3;border:1px solid #e5e7eb;padding:24px;border-radius:18px;backdrop-filter:saturate(1.2) blur(2px)}
-.hero-eyebrow{font-size:13px;color:#374151;text-transform:uppercase;letter-spacing:.2em}
-.hero h1{font-size:36px;margin:6px 0 8px}
-.hero p{color:#4b5563;margin:0 0 10px}
+.hero-eyebrow{font-size:13px;color:#f3f4f6;text-transform:uppercase;letter-spacing:.2em}
+.hero h1{font-size:42px;margin:6px 0 8px;color:#fff;transition:text-shadow .25s ease, transform .25s ease}
+.hero h1.neon:hover, .hero h1.neon:focus-visible{ text-shadow:0 0 6px #0ff,0 0 14px #0ff,0 0 26px #0ff,0 0 40px #0ff; transform:translateY(-1px)}
+.hero p{color:#f1f5f9;margin:0 0 10px}
 .hero .badges{display:flex;gap:8px;flex-wrap:wrap}
 .hero-img{border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.12)}
 
@@ -159,6 +114,10 @@ footer{margin-top:40px}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
 .chip{background:#f3f4f6;border:1px solid #e5e7eb;padding:6px 10px;border-radius:999px;font-size:13px}
 
+/* Live order toast */
+.live-order{position:fixed;left:16px;bottom:16px;background:#fff;border:1px solid #e5e7eb;border-left:4px solid var(--brand);box-shadow:0 10px 30px rgba(0,0,0,.15);border-radius:12px;padding:10px 14px;font-size:14px;z-index:200;display:none}
+.live-order b{font-weight:800}
+
 /* Responsive */
 @media (max-width: 1024px){
   .grid{grid-template-columns:repeat(4,1fr)}
@@ -174,6 +133,7 @@ footer{margin-top:40px}
   .grid{grid-template-columns:repeat(2,1fr)}
   .promos{grid-template-columns:1fr}
   .f-cols{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:30px}
 }
 @media (max-width:480px){
   .f-cols{grid-template-columns:1fr}
@@ -181,30 +141,36 @@ footer{margin-top:40px}
 </style>
 </head>
 <body>
- 
-  <div class="noticebar">📌 <span>NO EXCHANGE / NO RETURN / NO CANCELLATION</span></div>
-  <div class="navbar">
+
+  <!-- Top black stripe notification -->
+  <div class="topbar">
     <div class="container">
-      <div class="logo">Arju Suits</div>
-      <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#categories">Shop by Category</a>
-        <a href="#products">All Products</a>
-        <a href="#sale">Sale</a>
-        <a href="#contact">Contact Us</a>
-        <a href="#size">Size Guide</a>
-        <a href="#track">Track Order</a>
-      </nav>
-      <div class="nav-icons">
-        <a href="#account">👤</a>
-        <a href="#search">🔍</a>
-        <a href="#cart">🛒</a>
-      </div>
+      <div>📢 Festive Demo Offer — Free shipping over ₹1,999 · No exchange/returns on sale items.</div>
+      <div><a href="#contact">Contact</a> · <a href="#help">Help</a></div>
     </div>
   </div>
+
   <!-- Header -->
- 
+  <header>
+    <div class="container nav">
+      <button id="menuBtn" class="iconbtn" aria-label="Open menu">☰</button>
+      <div class="logo" aria-label="Arju Suits logo">Arju <span>Suits</span></div>
+      <nav class="navlinks" aria-label="primary">
+        <a href="#new">New</a>
+        <a href="#trending">Trending</a>
+        <a href="#categories">Categories</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="search">
+        <input id="searchInput" type="search" placeholder="Search products…" aria-label="Search products" />
+      </div>
+      <div class="icons">
+        <a class="iconbtn" href="#account" aria-label="Account">👤</a>
+        <a class="iconbtn" href="#wishlist" aria-label="Wishlist">♡</a>
+        <a class="iconbtn" href="#cart" aria-label="Cart"><span id="cartIcon">🛒</span><span id="cartCount" style="margin-left:4px;font-weight:700">0</span></a>
+      </div>
+    </div>
+  </header>
 
   <!-- Mobile Drawer -->
   <aside id="drawer" class="drawer" aria-hidden="true">
@@ -219,13 +185,13 @@ footer{margin-top:40px}
     <a href="#contact">Contact</a>
   </aside>
 
-  <!-- Hero -->
-  <section class="hero">
+  <!-- Hero (full-viewport after header) -->
+  <section class="hero" id="hero">
     <div class="container">
       <div class="hero-card">
         <div class="hero-copy">
           <div class="hero-eyebrow">Designer Wear</div>
-          <h1>Explore the Finest Indian Collection</h1>
+          <h1 class="neon" tabindex="0">Explore the Finest Indian Collection</h1>
           <p>Premium fabrics and modern silhouettes for every occasion. Weekly drops, ready to ship.</p>
           <div class="badges">
             <span class="badge ok">Ready to Ship</span>
@@ -343,20 +309,23 @@ footer{margin-top:40px}
     </div>
   </footer>
 
+  <!-- Live order toast -->
+  <div id="liveToast" class="live-order" role="status" aria-live="polite"></div>
+
 <script>
 // =====================
 // Demo data (swap with your own CMS/data later)
 // =====================
 const DEMO_PRODUCTS = [
-  {title:"Black Velvet Sharara", price:4750, compare:6990, tag:"velvet sharara", img:"https://labelamrita.com/cdn/shop/files/36E203E9-F71F-46F3-90F9-B9DDAF0D5D8E.jpg?v=1737908556&width=1206"},
-  {title:"Yellow Chinon Sharara", price:4990, compare:0, tag:"sharara", img:"https://labelamrita.com/cdn/shop/files/EE970360-8520-4C25-9B62-F9791E97D1C3.jpg?v=1737395500&width=1206"},
-  {title:"Green Velvet Sharara", price:5850, compare:0, tag:"velvet sharara", img:"https://labelamrita.com/cdn/shop/files/IMG-20250103-WA0036.jpg?v=1735920475&width=1200"},
-  {title:"Indo‑Western Dress", price:1990, compare:2490, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/1000511753_471e3385-58fa-4587-a9fc-bf17f87a9e3d.jpg?v=1715220803&width=1200"},
-  {title:"Ramagreen Velvet Flair", price:6350, compare:7990, tag:"velvet", img:"https://labelamrita.com/cdn/shop/files/48F2376E-638B-4E8A-A0E9-0048E0AC2F0E.jpg?v=1729709233&width=1206"},
-  {title:"Purple Velvet Azaaro", price:5990, compare:0, tag:"velvet", img:"https://labelamrita.com/cdn/shop/files/5038CEED-4D7D-41BA-988D-7677E589F2AE.jpg?v=1734542123&width=1206"},
+  {title:"Black Velvet Sharara", price:550, compare:6990, tag:"velvet sharara", img:"https://labelamrita.com/cdn/shop/files/36E203E9-F71F-46F3-90F9-B9DDAF0D5D8E.jpg?v=1737908556&width=1206"},
+  {title:"Yellow Chinon Sharara", price:550, compare:0, tag:"sharara", img:"https://labelamrita.com/cdn/shop/files/EE970360-8520-4C25-9B62-F9791E97D1C3.jpg?v=1737395500&width=1206"},
+  {title:"Green Velvet Sharara", price:550, compare:0, tag:"velvet sharara", img:"https://labelamrita.com/cdn/shop/files/IMG-20250103-WA0036.jpg?v=1735920475&width=1200"},
+  {title:"Indo‑Western Dress", price:990, compare:2490, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/1000511753_471e3385-58fa-4587-a9fc-bf17f87a9e3d.jpg?v=1715220803&width=1200"},
+  {title:"Ramagreen Velvet Flair", price:1200, compare:7990, tag:"velvet", img:"https://labelamrita.com/cdn/shop/files/48F2376E-638B-4E8A-A0E9-0048E0AC2F0E.jpg?v=1729709233&width=1206"},
+  {title:"Purple Velvet Azaaro", price:1199, compare:0, tag:"velvet", img:"https://labelamrita.com/cdn/shop/files/5038CEED-4D7D-41BA-988D-7677E589F2AE.jpg?v=1734542123&width=1206"},
   {title:"Teal Crepe Azaro", price:2950, compare:3490, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/BC8BA547-7B8E-4533-967C-F6D069B8BAD0.jpg?v=1753200102&width=1200"},
   {title:"Moon White Indo‑Western", price:1990, compare:0, tag:"indo cotton", img:"https://labelamrita.com/cdn/shop/files/1000511763.jpg?v=1715220526&width=1200"},
-  {title:"Off‑white Farshi Suit", price:4750, compare:0, tag:"cotton", img:"https://labelamrita.com/cdn/shop/files/AAB46B4C-39FB-43D3-A796-88DA09D355C1.jpg?v=1753631273&width=1200"},
+  {title:"Off‑white Farshi Suit", price:550, compare:0, tag:"cotton", img:"https://labelamrita.com/cdn/shop/files/AAB46B4C-39FB-43D3-A796-88DA09D355C1.jpg?v=1753631273&width=1200"},
   {title:"Azaro Suit – Black", price:2250, compare:0, tag:"indo", img:"https://labelamrita.com/cdn/shop/files/8EEBDB7D-E5C7-45B9-9812-E1DF46E651D6.jpg?v=1731954400&width=1200"},
   {title:"Blue Festive Set", price:2990, compare:3390, tag:"anarkali", img:"https://labelamrita.com/cdn/shop/files/2B0DEBF0-EA14-4BAC-9DC2-D1B2B28D7182.jpg?v=1751807956&width=1206"},
   {title:"Yellow Party Edit", price:2890, compare:0, tag:"anarkali", img:"https://labelamrita.com/cdn/shop/files/8D0529CF-3E3C-42B6-927C-3251F5C67496.jpg?v=1751989835&width=1206"},
@@ -369,7 +338,7 @@ function money(n){return `₹ ${n.toLocaleString('en-IN',{maximumFractionDigits:
 
 function productCard(p, i){
   return `
-    <a class="card product" href="#" data-tags="${p.tag}">
+    <a class="card product" href="/product${i+1}.html" data-tags="${p.tag}">
       <div class="thumb" style="background-image:url('${p.img}')"></div>
       <div class="meta">
         <div class="title">${p.title}</div>
@@ -384,6 +353,7 @@ function productCard(p, i){
       </div>
     </a>`
 }
+
 
 function renderGrids(){
   const newEl = document.getElementById('newGrid');
@@ -427,7 +397,36 @@ const closeBtn = document.getElementById('closeDrawer');
 openBtn.addEventListener('click',()=>{drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false')});
 closeBtn.addEventListener('click',()=>{drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true')});
 
+// Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Hero fill viewport below sticky header & topbar
+function setHeroVars(){
+  const header = document.querySelector('header');
+  const topbar = document.querySelector('.topbar');
+  const hh = header ? header.offsetHeight : 0;
+  const th = topbar ? topbar.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-h', hh + 'px');
+  document.documentElement.style.setProperty('--topbar-h', th + 'px');
+}
+window.addEventListener('load', setHeroVars);
+window.addEventListener('resize', setHeroVars);
+
+// Live pseudo purchase data
+const LIVE_NAMES = ['Ayesha','Rohan','Isha','Kavya','Arjun','Meera','Sana','Dev','Simran','Kabir'];
+const LIVE_CITIES = ['Mumbai','Delhi','Bengaluru','Pune','Chennai','Hyderabad','Kolkata','Jaipur'];
+const toast = document.getElementById('liveToast');
+function showLiveOrder(){
+  const item = DEMO_PRODUCTS[Math.floor(Math.random()*DEMO_PRODUCTS.length)];
+  const name = LIVE_NAMES[Math.floor(Math.random()*LIVE_NAMES.length)];
+  const city = LIVE_CITIES[Math.floor(Math.random()*LIVE_CITIES.length)];
+  const mins = Math.floor(Math.random()*9)+1;
+  toast.innerHTML = `🛍️ <b>${name}</b> from ${city} purchased <b>${item.title}</b> — ${money(item.price)} · ${mins} min ago`;
+  toast.style.display = 'block';
+  setTimeout(()=> toast.style.display='none', 6000);
+}
+setTimeout(showLiveOrder, 3500);
+setInterval(showLiveOrder, 12000);
 
 // Boot
 renderGrids();
